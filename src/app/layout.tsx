@@ -3,6 +3,7 @@ import { Andika, Poppins, Nunito } from "next/font/google";
 import { ThemeProvider as NextJSThemeProvider } from "next-themes";
 import "./globals.css";
 import Providers from "./providers";
+import Header from "@/components/ui/header";
 
 const andika = Andika({
   variable: "--font-andika",
@@ -46,6 +47,7 @@ export default function RootLayout({
           enableSystem
         >
           <Providers>
+            <Header/>
             <main className="min-h-screen container mx-auto px-4 py-8">
               {children}
             </main>
