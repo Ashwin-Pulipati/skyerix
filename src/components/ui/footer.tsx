@@ -1,7 +1,6 @@
 import { Github, Linkedin } from "lucide-react"
 import Link from "next/link"
-import { TooltipContent, TooltipProvider, TooltipTrigger } from "./tooltip";
-import { Tooltip } from "@radix-ui/react-tooltip";
+import { TooltipContent, TooltipProvider, TooltipTrigger, Tooltip } from "./tooltip";
 
 
 const Footer = () => {
