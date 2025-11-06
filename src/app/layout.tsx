@@ -48,12 +48,12 @@ export default function RootLayout({
           enableSystem
         >
           <Providers>
-            <Header/>
+            <Header />
             <main className="min-h-screen container mx-auto px-4 py-8">
               {children}
             </main>
+            <Footer />
           </Providers>
-          <Footer/>
         </NextJSThemeProvider>
       </body>
     </html>

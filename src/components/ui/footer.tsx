@@ -17,7 +17,7 @@ const Footer = () => {
       </span>
 
       <TooltipProvider delayDuration={150}>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 pr-0 md:pr-18">
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
