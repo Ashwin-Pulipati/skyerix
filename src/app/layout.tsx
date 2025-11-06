@@ -5,6 +5,7 @@ import "./globals.css";
 import Providers from "./providers";
 import Header from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
+import Scroller from "@/components/ui/scroller";
 
 const andika = Andika({
   variable: "--font-andika",
@@ -53,6 +54,7 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
+            <Scroller/>
           </Providers>
         </NextJSThemeProvider>
       </body>
