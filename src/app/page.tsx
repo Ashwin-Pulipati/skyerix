@@ -1,9 +1,13 @@
 import Searchbar from "@/components/ui/searchbar";
+import WeatherDashboard from "./weather-dashboard/page";
 
 export default function Home() {
   return (
-    <div className="md:hidden block">
-      <Searchbar />
+    <div>
+      <div className="md:hidden block">
+        <Searchbar />
+      </div>
+      <WeatherDashboard />
     </div>
   );
 }
