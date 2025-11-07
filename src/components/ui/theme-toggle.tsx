@@ -53,7 +53,7 @@ export default function ThemeToggle() {
                   onClick={() => setTheme(option.id)}
                   aria-label={`Switch to ${option.label} theme`}
                   className={cn(
-                    "flex w-full items-center justify-center rounded-full p-2 transition-colors duration-200",
+                    "flex w-full items-center justify-center rounded-full p-2 transition-colors duration-200 cursor-pointer",
                     isActive
                       ? "bg-background text-primary shadow-sm border border-muted-foreground/50"
                       : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
