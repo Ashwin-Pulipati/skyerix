@@ -46,12 +46,19 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
                   Feels like {formatTemp(feels_like)}
                 </p>
                 <div className="flex gap-2 text-sm font-medium">
-                  <span className="flex items-center gap-1 text-blue-500">
-                    <ArrowDown className="h-3 w-3" />
+                  <span
+                    className="flex items-center gap-1 text-primary"
+                    
+                    aria-label={`Low ${formatTemp(temp_min)}`}
+                  >
+                    <ArrowDown className="h-3 w-3" aria-hidden="true" />
                     {formatTemp(temp_min)}
                   </span>
-                  <span className="flex items-center gap-1 text-red-500">
-                    <ArrowUp className="h-3 w-3" />
+                  <span
+                    className="flex items-center gap-1 text-destructive"
+                    aria-label={`High ${formatTemp(temp_max)}`}
+                  >
+                    <ArrowUp className="h-3 w-3" aria-hidden="true" />
                     {formatTemp(temp_max)}
                   </span>
                 </div>
@@ -60,14 +67,18 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="flex items-center gap-2">
-                <Droplets className="h-4 w-4 text-blue-500" />
+                <Droplets
+                  className="h-4 w-4 text-primary"
+                  aria-hidden="true"
+                />
+
                 <div className="space-y-0.5">
                   <p className="text-sm font-medium">Humidity</p>
                   <p className="text-sm text-muted-foreground">{humidity}%</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Wind className="h-4 w-4 text-blue-500" />
+                <Wind className="h-4 w-4 text-primary" aria-hidden="true" />
                 <div className="space-y-0.5">
                   <p className="text-sm font-medium">Wind Speed</p>
                   <p className="text-sm text-muted-foreground">{speed} m/s</p>
@@ -80,7 +91,7 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
             <div className="relative flex aspect-square w-full max-w-[200px] items-center justify-center">
               <img
                 src={`https://openweathermap.org/img/wn/${currentWeather.icon}@4x.png`}
-                alt={currentWeather.description}
+                alt={currentWeather.description} 
                 className="h-full w-full object-contain"
               />
               <div className="absolute bottom-0 text-center">
