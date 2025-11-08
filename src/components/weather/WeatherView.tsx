@@ -6,6 +6,8 @@ import HourlyTemperature from "@/components/hourly-weather";
 import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 import WeatherDetails from "../weather-details";
+import { FiveDayWeatherForecast } from "../five-day-weather-forecast";
+
 
 interface WeatherViewProps {
   weatherData: WeatherData;
@@ -22,7 +24,6 @@ const WeatherView = ({
   isRefreshing,
   onRefresh,
 }: WeatherViewProps) => {
-  
   return (
     <div className="mt-7 md:mt-0 space-y-4">
       <div className="flex justify-between items-center">
@@ -42,19 +43,14 @@ const WeatherView = ({
         </Button>
       </div>
 
-      <div className="grid gap-6">
-        <div className="flex flex-col lg:flex-row gap-4">
-          <div className="flex-1">
-            <CurrentWeather data={weatherData} locationName={locationData} />
-          </div>
-          <div className="flex-1">
-            <HourlyTemperature data={forecastData} />
-          </div>
-          <WeatherDetails data={weatherData} />
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <CurrentWeather data={weatherData} locationName={locationData} />
+        <HourlyTemperature data={forecastData} />
+        <WeatherDetails data={weatherData} />
+        <FiveDayWeatherForecast data={forecastData} />
       </div>
     </div>
   );
-}
+};
 
 export default WeatherView;
