@@ -1,48 +1,55 @@
 "use client";
-import { CurrentWeather } from '@/components/current-weather';
-import LoadingSkeleton from '@/components/loading-skeleton';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button'
-import useGeolocation from '@/hooks/use-geolocation';
-import { useForecastQuery, useReverseGeoCodeQuery, useWeatherQuery } from '@/hooks/use-weather';
-import { AlertTriangle, MapPin, RefreshCcw, RefreshCw } from 'lucide-react'
-
+import { CurrentWeather } from "@/components/current-weather";
+import HourlyTemperature from "@/components/hourly-weather";
+import LoadingSkeleton from "@/components/loading-skeleton";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import useGeolocation from "@/hooks/use-geolocation";
+import {
+  useForecastQuery,
+  useReverseGeoCodeQuery,
+  useWeatherQuery,
+} from "@/hooks/use-weather";
+import { AlertTriangle, MapPin, RefreshCcw, RefreshCw } from "lucide-react";
 
 const WeatherDashboard = () => {
-    const { coordinates, error: locationError, getLocation, isLoading: locationLoading } = useGeolocation();
-    
-    const weatherQuery = useWeatherQuery(coordinates);
-    const forecastQuery = useForecastQuery(coordinates);
-    const locationQuery = useReverseGeoCodeQuery(coordinates);
+  const {
+    coordinates,
+    error: locationError,
+    getLocation,
+    isLoading: locationLoading,
+  } = useGeolocation();
 
-    // Function to refresh all data
-    const handleRefresh = () => {
-      getLocation();
-      if (coordinates) {
-        weatherQuery.refetch();
-        forecastQuery.refetch();
-        locationQuery.refetch();
-      }
-    };
+  const weatherQuery = useWeatherQuery(coordinates);
+  const forecastQuery = useForecastQuery(coordinates);
+  const locationQuery = useReverseGeoCodeQuery(coordinates);
 
-    if (locationLoading) {
-        return (
-          <div className="space-y-6">
-            <div className="mt-7 md:mt-0 space-y-4">
-              <div className="flex justify-between items-center">
-                <h1 className="text-xl font-bold tracking-tight">
-                  My Location
-                </h1>
-                <Button variant="default" size="icon-lg">
-                  <RefreshCcw size={20} />
-                </Button>
-              </div>
-              <LoadingSkeleton/>
-            </div>
+  // Function to refresh all data
+  const handleRefresh = () => {
+    getLocation();
+    if (coordinates) {
+      weatherQuery.refetch();
+      forecastQuery.refetch();
+      locationQuery.refetch();
+    }
+  };
+
+  if (locationLoading) {
+    return (
+      <div className="space-y-6">
+        <div className="mt-7 md:mt-0 space-y-4">
+          <div className="flex justify-between items-center">
+            <h1 className="text-xl font-bold tracking-tight">My Location</h1>
+            <Button variant="default" size="icon-lg">
+              <RefreshCcw size={20} />
+            </Button>
           </div>
-        );
+          <LoadingSkeleton />
+        </div>
+      </div>
+    );
   }
-  
+
   if (locationError) {
     return (
       <Alert variant="destructive">
@@ -109,35 +116,35 @@ const WeatherDashboard = () => {
     );
   }
 
-    return (
-      <div className="mt-7 md:mt-0 space-y-4">
-        <div className="flex justify-between items-center">
-          <h1 className="text-xl font-bold tracking-tight">My Location</h1>
-          <Button
-            variant="outline"
-            size="icon-lg"
-            onClick={handleRefresh}
-            disabled={weatherQuery.isFetching || forecastQuery.isFetching}
-          >
-            <RefreshCw
-              className={`${
-                weatherQuery.isFetching ? "animate-spin" : ""
-              }`}
-              size={20}
-            />
-          </Button>
-        </div>
+  return (
+    <div className="mt-7 md:mt-0 space-y-4">
+      <div className="flex justify-between items-center">
+        <h1 className="text-xl font-bold tracking-tight">My Location</h1>
+        <Button
+          variant="outline"
+          size="icon-lg"
+          onClick={handleRefresh}
+          disabled={weatherQuery.isFetching || forecastQuery.isFetching}
+        >
+          <RefreshCw
+            className={`${weatherQuery.isFetching ? "animate-spin" : ""}`}
+            size={20}
+          />
+        </Button>
+      </div>
 
-        <div className="grid gap-6">
-          <div className="flex flex-col lg:flex-row gap-4">
-            <CurrentWeather
-              data={weatherQuery.data}
-              locationName={locationName}
-            />
-          </div>
+      <div className="grid gap-6">
+        <div className="flex flex-col lg:flex-row gap-4">
+          <CurrentWeather
+            data={weatherQuery.data}
+            locationName={locationName}
+          />
+
+          <HourlyTemperature data={forecastQuery.data} />
         </div>
       </div>
-    );
-}
+    </div>
+  );
+};
 
-export default WeatherDashboard
+export default WeatherDashboard;
