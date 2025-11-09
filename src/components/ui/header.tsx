@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ThemeToggle from "./theme-toggle";
-import Searchbar from "./searchbar";
+import { CitySearchComponent } from "./city-search-component";
 
 const Header = () => {
   return (
@@ -24,8 +24,8 @@ const Header = () => {
           </span>
         </Link>
 
-        <div className="hidden md:block">
-          <Searchbar />
+        <div className="hidden md:block w-full md:max-w-xs lg:max-w-xl ">
+          <CitySearchComponent />
         </div>
 
         <nav className="flex items-center">

@@ -1,11 +1,18 @@
 "use client";
+import { CitySearchComponent } from "@/components/ui/city-search-component";
 import LocationRequired from "@/components/weather/LocationRequired";
 import WeatherError from "@/components/weather/WeatherError";
 import WeatherLoading from "@/components/weather/WeatherLoading";
 import WeatherView from "@/components/weather/WeatherView";
 import { useWeatherData } from "@/hooks/use-weather-data";
+import { useSearchParams } from "next/navigation";
 
 const WeatherDashboard = () => {
+  const searchParams = useSearchParams();
+  const lat = searchParams.get("lat");
+  const lon = searchParams.get("lon");
+  const coordinates = lat && lon ? { lat: Number(lat), lon: Number(lon) } : undefined;
+
   const {
     weatherData,
     forecastData,
@@ -14,8 +21,8 @@ const WeatherDashboard = () => {
     error,
     handleRefresh,
     getLocation,
-    coordinates,
-  } = useWeatherData();
+    coordinates: weatherCoordinates,
+  } = useWeatherData(coordinates);
 
   if (isLoading) {
     return <WeatherLoading />;
@@ -25,7 +32,7 @@ const WeatherDashboard = () => {
     return <WeatherError error={error.message} onRetry={handleRefresh} />;
   }
 
-  if (!coordinates) {
+  if (!weatherCoordinates) {
     return <LocationRequired onEnableLocation={getLocation} />;
   }
 
@@ -34,13 +41,19 @@ const WeatherDashboard = () => {
   }
 
   return (
-    <WeatherView
+    <div>
+      <div className="block md:hidden">
+        <CitySearchComponent />
+      </div>
+      <WeatherView
       weatherData={weatherData}
       forecastData={forecastData}
       locationData={locationData}
       isRefreshing={isLoading}
       onRefresh={handleRefresh}
     />
+    </div>
+    
   );
 };
 
