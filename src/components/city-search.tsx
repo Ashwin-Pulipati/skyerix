@@ -29,7 +29,7 @@ export function CitySearch() {
   const { favorites } = useFavorites();
   const { history, clearHistory, addToHistory } = useSearchHistory();
 
-  // Nice UX: press "/" to open the search
+  // Press "/" to open the search
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "/" && !open) {
@@ -52,18 +52,11 @@ export function CitySearch() {
       return;
     }
 
-    addToHistory.mutate({
-      query,
-      name,
-      lat,
-      lon,
-      country,
-    });
+    addToHistory.mutate({ query, name, lat, lon, country });
 
     setOpen(false);
     setQuery("");
 
-    // Navigate with Next.js router
     const cityParam = encodeURIComponent(name);
     router.push(`/weather-dashboard?lat=${lat}&lon=${lon}&city=${cityParam}`);
   };
@@ -72,8 +65,10 @@ export function CitySearch() {
     <>
       <Button
         variant="outline"
-        className="relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64"
+        className="relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64 rounded-full"
         onClick={() => setOpen(true)}
+        aria-haspopup="dialog"
+        aria-expanded={open}
       >
         <Search className="mr-2 h-4 w-4" aria-hidden="true" />
         Search cities...
@@ -88,8 +83,9 @@ export function CitySearch() {
           />
           <CommandList>
             {query.length > 2 && !isLoading && (
-              <CommandEmpty>No cities found.</CommandEmpty>
+              <CommandEmpty role="status">No cities found.</CommandEmpty>
             )}
+            <CommandSeparator/>
 
             {favorites.length > 0 && (
               <CommandGroup heading="Favorites">
@@ -98,16 +94,16 @@ export function CitySearch() {
                     key={city.id}
                     value={`${city.lat}|${city.lon}|${city.name}|${city.country}`}
                     onSelect={handleSelect}
+                    className="text-current group"
                   >
-                    <Star className="mr-2 h-4 w-4 text-yellow-500" />
-                    <span>{city.name}</span>
-                    {city.state && (
-                      <span className="text-sm text-muted-foreground">
-                        , {city.state}
-                      </span>
-                    )}
-                    <span className="text-sm text-muted-foreground">
-                      , {city.country}
+                    <Star
+                      className="mr-2 h-4 w-4 text-secondary group-data-[selected=true]:text-current"
+                      aria-hidden="true"
+                    />
+                    <span className="flex-1 text-sm">
+                      {city.name}
+                      {city.state ? `, ${city.state}` : ""}
+                      {`, ${city.country}`}
                     </span>
                   </CommandItem>
                 ))}
@@ -119,7 +115,7 @@ export function CitySearch() {
               <>
                 <CommandSeparator />
                 <CommandGroup>
-                  <div className="flex items-center justify-between px-2 my-2">
+                  <div className="my-2 flex items-center justify-between px-2">
                     <p className="text-xs text-muted-foreground">
                       Recent Searches
                     </p>
@@ -127,9 +123,17 @@ export function CitySearch() {
                       variant="ghost"
                       size="sm"
                       onClick={() => clearHistory.mutate()}
-                      className="gap-1"
+                      aria-label="Clear recent searches"
+                      className="
+                        text-destructive
+      hover:bg-destructive hover:text-destructive-foreground
+      dark:hover:bg-destructive dark:hover:text-destructive-foreground rounded-full
+                      "
                     >
-                      <XCircle className="h-4 w-4" aria-hidden="true" />
+                      <XCircle
+                        className="h-4 w-4 text-current"
+                        aria-hidden="true"
+                      />
                       Clear
                     </Button>
                   </div>
@@ -139,21 +143,18 @@ export function CitySearch() {
                       key={`history-${item.id}`}
                       value={`${item.lat}|${item.lon}|${item.name}|${item.country}`}
                       onSelect={handleSelect}
+                      className="text-current"
                     >
                       <Clock
-                        className="mr-2 h-4 w-4 text-muted-foreground"
+                        className="mr-2 h-4 w-4 text-current"
                         aria-hidden="true"
                       />
-                      <span>{item.name}</span>
-                      {item.state && (
-                        <span className="text-sm text-muted-foreground">
-                          , {item.state}
-                        </span>
-                      )}
-                      <span className="text-sm text-muted-foreground">
-                        , {item.country}
+                      <span className="flex-1 text-sm">
+                        {item.name}
+                        {item.state ? `, ${item.state}` : ""}
+                        {`, ${item.country}`}
                       </span>
-                      <span className="ml-auto text-xs text-muted-foreground">
+                      <span className="ml-auto whitespace-nowrap text-xs">
                         {format(item.searchedAt, "MMM d, h:mm a")}
                       </span>
                     </CommandItem>
@@ -167,7 +168,11 @@ export function CitySearch() {
             {locations && locations.length > 0 && (
               <CommandGroup heading="Suggestions">
                 {isLoading && (
-                  <div className="flex items-center justify-center p-4">
+                  <div
+                    className="flex items-center justify-center p-4"
+                    role="status"
+                    aria-live="polite"
+                  >
                     <Loader2
                       className="h-4 w-4 animate-spin"
                       aria-hidden="true"
@@ -180,16 +185,16 @@ export function CitySearch() {
                     key={`suggestion-${location.lat}-${location.lon}`}
                     value={`${location.lat}|${location.lon}|${location.name}|${location.country}`}
                     onSelect={handleSelect}
+                    className="text-current group"
                   >
-                    <Search className="mr-2 h-4 w-4" aria-hidden="true" />
-                    <span>{location.name}</span>
-                    {location.state && (
-                      <span className="text-sm text-muted-foreground">
-                        , {location.state}
-                      </span>
-                    )}
-                    <span className="text-sm text-muted-foreground">
-                      , {location.country}
+                    <Search
+                      className="mr-2 h-4 w-4 text-primary group-data-[selected=true]:text-current"
+                      aria-hidden="true"
+                    />
+                    <span className="flex-1 text-sm">
+                      {location.name}
+                      {location.state ? `, ${location.state}` : ""}
+                      {`, ${location.country}`}
                     </span>
                   </CommandItem>
                 ))}
