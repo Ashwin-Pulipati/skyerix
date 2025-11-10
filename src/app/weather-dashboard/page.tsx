@@ -1,6 +1,7 @@
 "use client";
 
 import CitySearch from "@/components/city-search";
+import FavoriteCities from "@/components/favorite-cities";
 import LocationRequired from "@/components/weather/LocationRequired";
 import WeatherError from "@/components/weather/WeatherError";
 import WeatherLoading from "@/components/weather/WeatherLoading";
@@ -51,6 +52,7 @@ const WeatherDashboard = () => {
       <div className="block md:hidden mb-4">
         <CitySearch />
       </div>
+      <FavoriteCities />
       {!coordinates && <LocationRequired onEnableLocation={getLocation} />}
       {coordinates && weatherData && forecastData && (
         <WeatherView

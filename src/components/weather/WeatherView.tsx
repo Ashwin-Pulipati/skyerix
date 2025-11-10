@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { MapPin, RefreshCw } from "lucide-react";
 import WeatherDetails from "../weather-details";
 import { FiveDayWeatherForecast } from "../five-day-weather-forecast";
-
+import { FavoriteButton } from "../favorite-button";
 
 interface WeatherViewProps {
   weatherData: WeatherData;
@@ -33,6 +33,7 @@ const WeatherView = ({
           {locationData?.name || "My Location"}
         </h1>
         <div className="flex items-center gap-4">
+          <FavoriteButton data={weatherData} />
           <Button
             variant="outline"
             size="icon-lg"
