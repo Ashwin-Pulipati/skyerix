@@ -4,7 +4,7 @@ import { ForecastData, GeocodingResponse, WeatherData } from "@/app/api/types";
 import { CurrentWeather } from "@/components/current-weather";
 import HourlyTemperature from "@/components/hourly-weather";
 import { Button } from "@/components/ui/button";
-import { RefreshCw } from "lucide-react";
+import { MapPin, RefreshCw } from "lucide-react";
 import WeatherDetails from "../weather-details";
 import { FiveDayWeatherForecast } from "../five-day-weather-forecast";
 
@@ -15,6 +15,7 @@ interface WeatherViewProps {
   locationData?: GeocodingResponse;
   isRefreshing: boolean;
   onRefresh: () => void;
+  onCurrentLocation: () => void;
 }
 
 const WeatherView = ({
@@ -23,6 +24,7 @@ const WeatherView = ({
   locationData,
   isRefreshing,
   onRefresh,
+  onCurrentLocation,
 }: WeatherViewProps) => {
   return (
     <div className="mt-7 md:mt-0 space-y-4">
@@ -30,17 +32,26 @@ const WeatherView = ({
         <h1 className="text-xl font-bold tracking-tight">
           {locationData?.name || "My Location"}
         </h1>
-        <Button
-          variant="outline"
-          size="icon-lg"
-          onClick={onRefresh}
-          disabled={isRefreshing}
-        >
-          <RefreshCw
-            className={`${isRefreshing ? "animate-spin" : ""}`}
-            size={20}
-          />
-        </Button>
+        <div className="flex items-center gap-4">
+          <Button
+            variant="outline"
+            size="icon-lg"
+            onClick={onCurrentLocation}
+          >
+            <MapPin size={20} />
+          </Button>
+          <Button
+            variant="outline"
+            size="icon-lg"
+            onClick={onRefresh}
+            disabled={isRefreshing}
+          >
+            <RefreshCw
+              className={`${isRefreshing ? "animate-spin" : ""}`}
+              size={20}
+            />
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
