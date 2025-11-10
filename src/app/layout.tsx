@@ -50,7 +50,7 @@ export default function RootLayout({
         >
           <Providers>
             <Header />
-            <main className="min-h-screen container mx-auto px-4 py-8">
+            <main className="min-h-screen container mx-auto max-w-7xl px-4 py-8">
               {children}
             </main>
             <Footer />

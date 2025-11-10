@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
-import { Search, Loader2, Clock, XCircle } from "lucide-react";
+import { Search, Loader2, Clock, XCircle, Star } from "lucide-react";
 import { useLocationSearch } from "@/hooks/use-weather";
 
 import {
@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
 import { useSearchHistory } from "@/hooks/use-search-history";
+import { useFavorites } from "@/hooks/use-favorites";
 
 export function CitySearch() {
   const [open, setOpen] = useState(false);
@@ -25,6 +26,7 @@ export function CitySearch() {
   const router = useRouter();
 
   const { data: locations, isLoading } = useLocationSearch(query);
+  const { favorites } = useFavorites();
   const { history, clearHistory, addToHistory } = useSearchHistory();
 
   // Nice UX: press "/" to open the search
@@ -87,6 +89,29 @@ export function CitySearch() {
           <CommandList>
             {query.length > 2 && !isLoading && (
               <CommandEmpty>No cities found.</CommandEmpty>
+            )}
+
+            {favorites.length > 0 && (
+              <CommandGroup heading="Favorites">
+                {favorites.map((city) => (
+                  <CommandItem
+                    key={city.id}
+                    value={`${city.lat}|${city.lon}|${city.name}|${city.country}`}
+                    onSelect={handleSelect}
+                  >
+                    <Star className="mr-2 h-4 w-4 text-yellow-500" />
+                    <span>{city.name}</span>
+                    {city.state && (
+                      <span className="text-sm text-muted-foreground">
+                        , {city.state}
+                      </span>
+                    )}
+                    <span className="text-sm text-muted-foreground">
+                      , {city.country}
+                    </span>
+                  </CommandItem>
+                ))}
+              </CommandGroup>
             )}
 
             {/* Search History */}
