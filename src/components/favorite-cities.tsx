@@ -103,7 +103,9 @@ function FavoriteCityTablet({
 export function FavoriteCities() {
   const { favorites, removeFavorite } = useFavorites();
 
-  if (!favorites.length) return null;
+  if (!favorites || favorites.length === 0) {
+    return null;
+  }
 
   return (
     <>

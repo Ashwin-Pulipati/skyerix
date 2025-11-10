@@ -1,13 +1,18 @@
 "use client";
 
 import CitySearch from "@/components/city-search";
-import FavoriteCities from "@/components/favorite-cities";
 import LocationRequired from "@/components/weather/LocationRequired";
 import WeatherError from "@/components/weather/WeatherError";
 import WeatherLoading from "@/components/weather/WeatherLoading";
 import WeatherView from "@/components/weather/WeatherView";
 import { useWeatherData } from "@/hooks/use-weather-data";
 import { useSearchParams, useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+
+const FavoriteCities = dynamic(
+  () => import("@/components/favorite-cities"),
+  { ssr: false }
+);
 
 const WeatherDashboard = () => {
   const searchParams = useSearchParams();

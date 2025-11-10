@@ -1,5 +1,7 @@
 // src/hooks/use-favorites.ts
+"use client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useLocalStorage } from "./use-local-storage";
 
 export interface FavoriteCity {
@@ -17,54 +19,44 @@ export function useFavorites() {
     "favorites",
     []
   );
-  const queryClient = useQueryClient();
+  const qc = useQueryClient();
+
+  // ⬅ keep the cache in sync with localStorage-backed state
+  useEffect(() => {
+    qc.setQueryData(["favorites"], favorites);
+  }, [favorites, qc]);
 
   const favoritesQuery = useQuery({
     queryKey: ["favorites"],
     queryFn: () => favorites,
     initialData: favorites,
-    staleTime: Infinity, // Since we're managing the data in localStorage
+    staleTime: Infinity, // optional: these don't need refetch semantics
   });
 
   const addFavorite = useMutation({
     mutationFn: async (city: Omit<FavoriteCity, "id" | "addedAt">) => {
-      const newFavorite: FavoriteCity = {
+      const newFav: FavoriteCity = {
         ...city,
         id: `${city.lat}-${city.lon}`,
         addedAt: Date.now(),
       };
-
-      // Prevent duplicates
-      const exists = favorites.some((fav) => fav.id === newFavorite.id);
-      if (exists) return favorites;
-
-      const newFavorites = [...favorites, newFavorite];
-      setFavorites(newFavorites);
-      return newFavorites;
-    },
-    onSuccess: () => {
-      // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ["favorites"] });
+      setFavorites((prev) =>
+        prev.some((f) => f.id === newFav.id) ? prev : [...prev, newFav]
+      );
     },
   });
 
   const removeFavorite = useMutation({
     mutationFn: async (cityId: string) => {
-      const newFavorites = favorites.filter((city) => city.id !== cityId);
-      setFavorites(newFavorites);
-      return newFavorites;
-    },
-    onSuccess: () => {
-      // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ["favorites"] });
+      setFavorites((prev) => prev.filter((c) => c.id !== cityId));
     },
   });
 
   return {
-    favorites: favoritesQuery.data,
+    favorites: favoritesQuery.data ?? [],
     addFavorite,
     removeFavorite,
     isFavorite: (lat: number, lon: number) =>
-      favorites.some((city) => city.lat === lat && city.lon === lon),
+      (favoritesQuery.data ?? []).some((c) => c.lat === lat && c.lon === lon),
   };
 }
