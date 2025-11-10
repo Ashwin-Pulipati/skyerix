@@ -1,14 +1,18 @@
-import { Github, Linkedin } from "lucide-react"
-import Link from "next/link"
-import { TooltipContent, TooltipProvider, TooltipTrigger, Tooltip } from "./tooltip";
-
+import { Github, Linkedin } from "lucide-react";
+import Link from "next/link";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./tooltip";
 
 const Footer = () => {
   return (
     <footer className="flex flex-col md:flex-row space-y-4 md:space-y-0 justify-between items-center px-4 py-3 bg-background/95 border-t border-border">
       <Link href="/">
         <h1 className="font-display text-2xl font-bold text-gradient">
-          SKYERIS
+          SKYERIX
         </h1>
       </Link>
 
@@ -21,7 +25,7 @@ const Footer = () => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="https://github.com/Ashwin-Pulipati/skyeris"
+                href="https://github.com/Ashwin-Pulipati/skyerix"
                 className="bg-primary text-background rounded-full p-2 hover:bg-primary/90 transition-colors"
               >
                 <Github size={20} />
@@ -31,7 +35,7 @@ const Footer = () => {
               <p>Ashwins GitHub</p>
             </TooltipContent>
           </Tooltip>
-          
+
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
@@ -49,6 +53,6 @@ const Footer = () => {
       </TooltipProvider>
     </footer>
   );
-}
+};
 
-export default Footer
+export default Footer;

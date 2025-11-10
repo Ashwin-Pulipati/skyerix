@@ -14,13 +14,13 @@ const Header = () => {
         >
           <Image
             src="/logo.png"
-            alt="SKYERIS logo"
+            alt="SKYERIX logo"
             width={96}
             height={96}
             className="w-14 h-14 md:w-20 md:h-20 object-contain"
           />
           <span className="font-display text-xl md:text-3xl font-bold text-gradient leading-tight md:leading-none">
-            SKYERIS
+            SKYERIX
           </span>
         </Link>
           <div className="hidden md:block">
