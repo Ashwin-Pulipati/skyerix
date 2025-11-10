@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ThemeToggle from "./theme-toggle";
-import Searchbar from "./searchbar";
+import CitySearch from "../city-search";
 
 const Header = () => {
   return (
@@ -25,7 +25,7 @@ const Header = () => {
         </Link>
 
         <div className="hidden md:block">
-          <Searchbar />
+          <CitySearch />
         </div>
 
         <nav className="flex items-center">
