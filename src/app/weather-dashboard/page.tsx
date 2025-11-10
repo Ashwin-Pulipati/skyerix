@@ -1,11 +1,22 @@
 "use client";
+
+import CitySearch from "@/components/city-search";
 import LocationRequired from "@/components/weather/LocationRequired";
 import WeatherError from "@/components/weather/WeatherError";
 import WeatherLoading from "@/components/weather/WeatherLoading";
 import WeatherView from "@/components/weather/WeatherView";
 import { useWeatherData } from "@/hooks/use-weather-data";
+import { useSearchParams } from "next/navigation";
 
 const WeatherDashboard = () => {
+  const searchParams = useSearchParams();
+  const lat = searchParams.get("lat");
+  const lon = searchParams.get("lon");
+  const city = searchParams.get("city");
+
+  const location =
+    lat && lon ? { lat: parseFloat(lat), lon: parseFloat(lon) } : undefined;
+
   const {
     weatherData,
     forecastData,
@@ -15,7 +26,7 @@ const WeatherDashboard = () => {
     handleRefresh,
     getLocation,
     coordinates,
-  } = useWeatherData();
+  } = useWeatherData(location);
 
   if (isLoading) {
     return <WeatherLoading />;
@@ -25,22 +36,27 @@ const WeatherDashboard = () => {
     return <WeatherError error={error.message} onRetry={handleRefresh} />;
   }
 
-  if (!coordinates) {
-    return <LocationRequired onEnableLocation={getLocation} />;
-  }
-
-  if (!weatherData || !forecastData) {
-    return <WeatherLoading />;
-  }
+  const displayLocation =
+    city && locationData
+      ? { ...locationData, name: city, lat: locationData.lat, lon: locationData.lon }
+      : locationData;
 
   return (
-    <WeatherView
-      weatherData={weatherData}
-      forecastData={forecastData}
-      locationData={locationData}
-      isRefreshing={isLoading}
-      onRefresh={handleRefresh}
-    />
+    <div>
+      <div className="block md:hidden mb-4">
+        <CitySearch />
+      </div>
+      {!coordinates && <LocationRequired onEnableLocation={getLocation} />}
+      {coordinates && weatherData && forecastData && (
+        <WeatherView
+          weatherData={weatherData}
+          forecastData={forecastData}
+          locationData={displayLocation}
+          isRefreshing={isLoading}
+          onRefresh={handleRefresh}
+        />
+      )}
+    </div>
   );
 };
 
