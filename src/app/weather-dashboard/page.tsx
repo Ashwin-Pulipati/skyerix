@@ -6,10 +6,11 @@ import WeatherError from "@/components/weather/WeatherError";
 import WeatherLoading from "@/components/weather/WeatherLoading";
 import WeatherView from "@/components/weather/WeatherView";
 import { useWeatherData } from "@/hooks/use-weather-data";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 const WeatherDashboard = () => {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const lat = searchParams.get("lat");
   const lon = searchParams.get("lon");
   const city = searchParams.get("city");
@@ -27,6 +28,10 @@ const WeatherDashboard = () => {
     getLocation,
     coordinates,
   } = useWeatherData(location);
+
+  const handleCurrentLocation = () => {
+    router.push("/weather-dashboard");
+  };
 
   if (isLoading) {
     return <WeatherLoading />;
@@ -54,6 +59,7 @@ const WeatherDashboard = () => {
           locationData={displayLocation}
           isRefreshing={isLoading}
           onRefresh={handleRefresh}
+          onCurrentLocation={handleCurrentLocation}
         />
       )}
     </div>

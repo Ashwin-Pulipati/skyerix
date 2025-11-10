@@ -21,7 +21,7 @@ export const useWeatherData = (location?: { lat: number; lon: number }) => {
   const locationQuery = useReverseGeoCodeQuery(coordinates);
 
   const handleRefresh = () => {
-    if (!location) {
+    if (!location && !coordinates) {
       getLocation();
     }
     if (coordinates) {
