@@ -6,6 +6,7 @@ import Providers from "./providers";
 import Header from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
 import Scroller from "@/components/ui/scroller";
+import { Toaster } from "@/components/ui/sonner"; 
 
 const andika = Andika({
   variable: "--font-andika",
@@ -54,7 +55,8 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
-            <Scroller/>
+            <Scroller />
+            <Toaster position="top-right" richColors closeButton />
           </Providers>
         </NextJSThemeProvider>
       </body>
