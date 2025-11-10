@@ -23,11 +23,9 @@ const Header = () => {
             SKYERIS
           </span>
         </Link>
-
-        <div className="hidden md:block">
+          <div className="hidden md:block">
           <CitySearch />
         </div>
-
         <nav className="flex items-center">
           <ThemeToggle />
         </nav>
