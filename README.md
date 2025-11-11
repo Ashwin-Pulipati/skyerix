@@ -81,7 +81,7 @@ Make sure you have Node.js and npm installed on your machine.
 
 ## 🚀 Usage
 
-Skyrix is designed for simplicity and ease of use. Upon visiting the site, you can allow location access to get your local weather and use the search bar to find any city. The dashboard will display the current weather, hourly and daily forecasts, and other detailed metrics. You can add cities to your favorites to see them pinned on the world map for quick access.
+Skyrix is designed for simplicity and ease of use. Upon visiting the site, you can allow location access to get your local weather or use the search bar to find any city. The dashboard will display the current weather, hourly and daily forecasts, and other detailed metrics. You can add cities to your favorites to see them pinned on the world map for quick access.
 
 ## 🤝 Contributing
 
