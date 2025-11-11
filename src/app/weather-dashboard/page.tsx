@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import CitySearch from "@/components/city-search";
 import LocationRequired from "@/components/dashboard/location-required";
 import WeatherError from "@/components/dashboard/weather-error";
@@ -14,7 +15,7 @@ const FavoriteCities = dynamic(
   { ssr: false }
 );
 
-const WeatherDashboard = () => {
+function WeatherDashboardInner() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const lat = searchParams.get("lat");
@@ -39,13 +40,9 @@ const WeatherDashboard = () => {
     router.push("/weather-dashboard");
   };
 
-  if (isLoading) {
-    return <WeatherLoading />;
-  }
-
-  if (error) {
+  if (isLoading) return <WeatherLoading />;
+  if (error)
     return <WeatherError error={error.message} onRetry={handleRefresh} />;
-  }
 
   const displayLocation =
     city && locationData
@@ -59,7 +56,7 @@ const WeatherDashboard = () => {
 
   return (
     <div>
-      <div className="block md:hidden mb-4">
+      <div className="mb-4 block md:hidden">
         <CitySearch />
       </div>
       <FavoriteCities />
@@ -76,6 +73,12 @@ const WeatherDashboard = () => {
       )}
     </div>
   );
-};
+}
 
-export default WeatherDashboard;
+export default function WeatherDashboard() {
+  return (
+    <Suspense fallback={<WeatherLoading />}>
+      <WeatherDashboardInner />
+    </Suspense>
+  );
+}
