@@ -88,11 +88,11 @@ function DialogContent({
             aria-label="Close"
             className="
       absolute right-2 top-2 inline-flex h-8 w-8 items-center justify-center rounded-full
-      text-muted-foreground
+      text-foreground
       hover:bg-destructive hover:text-destructive-foreground
       dark:hover:bg-destructive dark:hover:text-destructive-foreground
       focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background
-      transition-colors
+      transition-colors bg-muted-foreground/30
     "
           >
             <XIcon className="h-4 w-4 text-current" aria-hidden="true" />

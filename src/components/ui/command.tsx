@@ -90,7 +90,7 @@ function CommandInput({
     <div
       data-slot="command-input-wrapper"
       className={cn(
-        "relative mx-2 my-2 flex h-9 items-center gap-2 rounded-full border-input bg-background px-3 pr-2",
+        "relative m-2 mt-4 flex h-9 items-center gap-2 rounded-full border-input bg-background px-3 pr-2",
         "focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/60"
       )}
     >
