@@ -17,6 +17,10 @@
 Skyrix is a beautifully designed weather application built with a modern tech stack. It allows users to get instantaneous, detailed weather updates for any city, track hourly and 5-day forecasts, and visualize their favorite locations on an interactive world map. With a clean, responsive UI and powerful data-fetching capabilities, Skyrix makes it easy to stay informed about the weather.
 
 
+
+https://github.com/user-attachments/assets/72480092-1a51-4b5e-8cba-1a2946f77f09
+
+
 ## ⚙️ Built With
 
 This project is built with a modern tech stack that ensures a fast, responsive, and scalable application.
