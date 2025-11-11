@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <a href="https://github.com/Ashwin-Pulipati/skyrix">
+    <img src="public/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-## Getting Started
+  <h3 align="center">Skyrix</h3>
 
-First, run the development server:
+  <p align="center">
+    A sleek, modern weather dashboard providing real-time weather information, forecasts, and a world map of your favorite cities.
+    <br />
+    <a href="#"><strong>View Demo »</strong></a>
+  </p>
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📝 About The Project
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Skyrix is a beautifully designed weather application built with a modern tech stack. It allows users to get instantaneous, detailed weather updates for any city, track hourly and 5-day forecasts, and visualize their favorite locations on an interactive world map. With a clean, responsive UI and powerful data-fetching capabilities, Skyrix makes it easy to stay informed about the weather.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+_(A placeholder for a screenshot of the application will be here)_
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚙️ Built With
 
-## Learn More
+This project is built with a modern tech stack that ensures a fast, responsive, and scalable application.
 
-To learn more about Next.js, take a look at the following resources:
+*   **Framework:** [Next.js](https://nextjs.org/)
+*   **Language:** [TypeScript](https://www.typescriptlang.org/)
+*   **Data Fetching:** [TanStack Query](https://tanstack.com/query/latest)
+*   **UI:** [Tailwind CSS](https://tailwindcss.com/) & [Shadcn/UI](https://ui.shadcn.com/)
+*   **Charting:** [Recharts](https://recharts.org/)
+*   **Maps:** [Leaflet](https://leafletjs.com/) & [React-Leaflet](https://react-leaflet.js.org/)
+*   **Deployment:** [Vercel](https://vercel.com/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✅ Key Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Real-time Weather:** Get up-to-date weather information for any city in the world.
+- **City Search:** Quickly find weather information for any location.
+- **Geolocation:** Automatically fetch weather for your current location.
+- **Hourly & 5-Day Forecasts:** Plan ahead with detailed hourly and daily weather predictions.
+- **Interactive World Map:** Pin and view your favorite cities on a beautiful world map.
+- **Weather Details:** Access in-depth information like humidity, wind speed, visibility, and more.
+- **Light & Dark Mode:** A comfortable viewing experience in any lighting condition.
+- **Responsive Design:** A seamless experience on both desktop and mobile devices.
 
-## Deploy on Vercel
+## ▶️ Getting Started
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To get a local copy up and running, follow these simple steps.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Prerequisites
+
+Make sure you have Node.js and npm installed on your machine.
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
+
+### Installation
+
+1.  **Clone the repository:**
+    ```sh
+    git clone https://github.com/Ashwin-Pulipati/skyrix.git
+    cd skyrix
+    ```
+2.  **Install NPM packages:**
+    ```sh
+    npm install
+    ```
+3.  **Set up your environment variables:**
+    Create a `.env.local` file in the root of your project and add your OpenWeather API key.
+    ```env
+    # OpenWeather API Key
+    NEXT_PUBLIC_OPENWEATHER_API_KEY=YOUR_API_KEY
+    ```
+4.  **Run the development server:**
+    ```sh
+    npm run dev
+    ```
+5.  Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+
+## 🚀 Usage
+
+Skyrix is designed for simplicity and ease of use. Upon visiting the site, you can allow location access to get your local weather and use the search bar to find any city. The dashboard will display the current weather, hourly and daily forecasts, and other detailed metrics. You can add cities to your favorites to see them pinned on the world map for quick access.
+
+## 🤝 Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
+You can also report a bug or request a feature by opening an issue:
+- [Report Bug](https://github.com/Ashwin-Pulipati/skyrix/issues)
+- [Request Feature](https://github.com/Ashwin-Pulipati/skyrix/issues)
+
+
+## 📄 License
+
+Distributed under the MIT License. See the `LICENSE` file for more information.
+
+## 📧 Contact
+
+Ashwin Pulipati - [LinkedIn](https://www.linkedin.com/in/ashwinpulipati/) - ashwinpulipati@gmail.com
+
+Project Link: [https://github.com/Ashwin-Pulipati/skyrix](https://github.com/Ashwin-Pulipati/skyrix)
