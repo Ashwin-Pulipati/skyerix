@@ -84,7 +84,6 @@ const HourlyWeather = ({ data }: HourlyTemperatureProps) => {
 
   return (
     <Card className="font-sans text-md leading-[var(--line-height)] text-foreground">
-      {/* SINGLE Tabs root wraps triggers + content */}
       <Tabs defaultValue="table" className="font-sans">
         <CardHeader className="pb-2 sm:pb-3">
           <div className="flex items-center justify-between gap-3">
@@ -99,7 +98,6 @@ const HourlyWeather = ({ data }: HourlyTemperatureProps) => {
         </CardHeader>
 
         <CardContent>
-          {/* TABLE (default) */}
           <TabsContent value="table">
             <div className="w-full overflow-x-auto">
               <Table>
@@ -129,8 +127,7 @@ const HourlyWeather = ({ data }: HourlyTemperatureProps) => {
               </Table>
             </div>
           </TabsContent>
-
-          {/* CHART (mounted only when active) */}
+          
           <TabsContent value="chart">
             <div
               className="h-[220px] w-full sm:h-[240px]"

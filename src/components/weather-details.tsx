@@ -67,7 +67,6 @@ const WeatherDetails = ({ data }: WeatherDetailsProps) => {
               aria-label={`${detail.title}: ${detail.value}`}
               className="flex items-center gap-3 rounded-lg border bg-card p-4 shadow-xs"
             >
-              {/* keep color logic from detail.color; just make it accessible */}
               <detail.icon
                 className={`h-5 w-5 ${detail.color}`}
                 aria-hidden="true"

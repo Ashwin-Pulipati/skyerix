@@ -20,9 +20,7 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
     <Card className="overflow-hidden font-sans text-md leading-[var(--line-height)] text-foreground">
       <CardContent className="p-4 sm:p-6">
         <div className="grid gap-6 md:grid-cols-2">
-          {/* Left side */}
           <div className="space-y-4">
-            {/* Location block */}
             <div className="space-y-1.5">
               <div className="flex min-w-0 items-baseline gap-1">
                 <h2
@@ -43,8 +41,7 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
                 {locationName?.country}
               </p>
             </div>
-
-            {/* Temperature */}
+            
             <div className="flex items-end gap-3">
               <p className="font-display text-6xl sm:text-7xl font-bold tracking-tighter leading-[0.9]">
                 {formatTemp(temp)}
@@ -71,8 +68,7 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
                 </div>
               </div>
             </div>
-
-            {/* Humidity / Wind */}
+            
             <div className="grid grid-cols-2 gap-4 font-sans">
               <div className="flex items-center gap-2 min-w-0">
                 <Droplets
@@ -96,8 +92,7 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
               </div>
             </div>
           </div>
-
-          {/* Right side */}
+          
           <div className="flex items-center justify-center">
             <figure
               className="relative flex aspect-square w-full max-w-[180px] sm:max-w-[200px] items-center justify-center"

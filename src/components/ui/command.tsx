@@ -52,8 +52,7 @@ function CommandDialog({
           {description}
         </DialogDescription>
       </DialogHeader>
-
-      {/* pt-10 ensures any outer close button won't overlap the input */}
+      
       <DialogContent
         className={cn("overflow-hidden p-0 pt-10", className)}
         showCloseButton={showCloseButton}

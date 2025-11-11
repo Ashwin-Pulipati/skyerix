@@ -20,7 +20,6 @@ export function useFavorites() {
   );
   const qc = useQueryClient();
 
-  // ⬅ keep the cache in sync with localStorage-backed state
   useEffect(() => {
     qc.setQueryData(["favorites"], favorites);
   }, [favorites, qc]);
@@ -29,7 +28,7 @@ export function useFavorites() {
     queryKey: ["favorites"],
     queryFn: () => favorites,
     initialData: favorites,
-    staleTime: Infinity, // optional: these don't need refetch semantics
+    staleTime: Infinity, 
   });
 
   const addFavorite = useMutation({

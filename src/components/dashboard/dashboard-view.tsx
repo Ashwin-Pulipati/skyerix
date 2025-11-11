@@ -40,7 +40,6 @@ const WeatherView = ({
         </h1>
 
         <div className="flex items-center gap-4">
-          {/* Favorite */}
           <Tooltip>
             <TooltipTrigger asChild>
               <span className="inline-flex">
@@ -52,8 +51,7 @@ const WeatherView = ({
             </TooltipTrigger>
             <TooltipContent side="bottom">Toggle favorite</TooltipContent>
           </Tooltip>
-
-          {/* Current location */}
+          
           <Tooltip>
             <TooltipTrigger asChild>
               <span className="inline-flex">
@@ -70,11 +68,9 @@ const WeatherView = ({
             </TooltipTrigger>
             <TooltipContent side="bottom">Use current location</TooltipContent>
           </Tooltip>
-
-          {/* Refresh (works even when disabled) */}
+         
           <Tooltip>
             <TooltipTrigger asChild>
-              {/* Wrap disabled buttons so Radix can still receive pointer events */}
               <span
                 className="inline-flex"
                 tabIndex={isRefreshing ? 0 : undefined}

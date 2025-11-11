@@ -36,7 +36,6 @@ function FavoriteCityTablet({
       "
       aria-label={`Open weather for ${name}`}
     >
-      {/* full-bleed interactive surface */}
       <button
         type="button"
         onClick={goToCity}
@@ -69,11 +68,9 @@ function FavoriteCityTablet({
                 decoding="async"
               />
               <div className="min-w-0">
-                {/* city name: body font, fluid md */}
                 <p className="truncate text-md font-medium" title={name}>
                   {name}
                 </p>
-                {/* country: muted, fluid xs */}
                 <p className="text-xs text-muted-foreground">
                   {weather.sys?.country}
                 </p>
@@ -81,7 +78,6 @@ function FavoriteCityTablet({
             </div>
 
             <div className="z-10 ml-auto text-right">
-              {/* temp: display font, fluid 2xl, tight tracking */}
               <p className="font-display text-2xl font-bold tracking-tight">
                 {Math.round(weather.main?.temp ?? 0)}°
               </p>
@@ -95,8 +91,7 @@ function FavoriteCityTablet({
           </div>
         ) : null}
       </button>
-
-      {/* remove button as separate sibling (no nesting) */}
+      
       <Button
         type="button"
         variant="ghost"

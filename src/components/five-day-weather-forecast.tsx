@@ -55,8 +55,7 @@ export function FiveDayWeatherForecast({ data }: FiveDayWeatherForecastProps) {
     () => Object.values(dailyForecasts).slice(1, 6),
     [dailyForecasts]
   );
-
-  // Format temperature
+  
   const formatTemp = (temp: number) => `${Math.round(temp)}°`;
 
   return (
@@ -68,7 +67,6 @@ export function FiveDayWeatherForecast({ data }: FiveDayWeatherForecastProps) {
       </CardHeader>
 
       <CardContent>
-        {/* Responsive container: keeps table readable on mobile */}
         <div className="w-full overflow-x-auto">
           <Table>
             <TableCaption className="text-sm text-muted-foreground">
@@ -92,7 +90,6 @@ export function FiveDayWeatherForecast({ data }: FiveDayWeatherForecastProps) {
             <TableBody>
               {nextDays.map((day) => (
                 <TableRow key={day.date}>
-                  {/* Date + description */}
                   <TableCell className="align-middle">
                     <div className="flex flex-col">
                       <p className="font-medium">
@@ -103,8 +100,7 @@ export function FiveDayWeatherForecast({ data }: FiveDayWeatherForecastProps) {
                       </p>
                     </div>
                   </TableCell>
-
-                  {/* Temps: low (primary), high (destructive) */}
+                  
                   <TableCell className="align-middle">
                     <div className="flex items-center justify-center gap-4">
                       <span
@@ -128,8 +124,7 @@ export function FiveDayWeatherForecast({ data }: FiveDayWeatherForecastProps) {
                       </span>
                     </div>
                   </TableCell>
-
-                  {/* Humidity + wind, right-aligned */}
+                  
                   <TableCell className="align-middle">
                     <div className="ml-auto flex items-center justify-end gap-6">
                       <span

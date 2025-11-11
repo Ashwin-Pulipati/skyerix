@@ -20,7 +20,6 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 
-// --- Fit bounds to all points ------------------------------------------------
 function FitToPoints({
   points,
 }: {
@@ -38,8 +37,6 @@ function FitToPoints({
   return null;
 }
 
-// --- Icon factories -----------------------------------------------------------
-// Outline pin (for favorites) — stroke only, no fill.
 function createPinOutline(colorVar: string): DivIcon {
   return L.divIcon({
     html: `
@@ -58,9 +55,7 @@ function createPinOutline(colorVar: string): DivIcon {
   });
 }
 
-// Filled pin (for current location) — solid fill, inner dot contrasts with theme.
 function createPinFilled(colorVar: string): DivIcon {
-  // Uses your CSS vars so it adapts to light/dark automatically.
   return L.divIcon({
     html: `
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
@@ -74,12 +69,11 @@ function createPinFilled(colorVar: string): DivIcon {
     `,
     className: "",
     iconSize: [28, 28],
-    iconAnchor: [14, 26], // tip of the pin
+    iconAnchor: [14, 26],
     popupAnchor: [0, -22],
   });
 }
 
-// --- Component ----------------------------------------------------------------
 export default function WorldFavoritesMapInner() {
   const router = useRouter();
   const { favorites } = useFavorites();
@@ -99,7 +93,6 @@ export default function WorldFavoritesMapInner() {
     return [20, 0];
   }, [favorites, hasFavorites, coordinates]);
 
-  // Icons themed via CSS tokens from globals.css
   const favoriteIcon = useMemo(() => createPinOutline("var(--secondary)"), []);
   const currentIcon = useMemo(() => createPinFilled("var(--primary)"), []);
 
@@ -128,8 +121,7 @@ export default function WorldFavoritesMapInner() {
             />
 
             {points.length > 0 && <FitToPoints points={points} />}
-
-            {/* Favorites (outline pins) */}
+           
             {hasFavorites &&
               favorites.map((f) => (
                 <Marker

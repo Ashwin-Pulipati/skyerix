@@ -27,8 +27,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
     },
     [key]
   );
-
-  // Keep multiple tabs in sync
+  
   useEffect(() => {
     if (typeof window === "undefined") return;
     const onStorage = (e: StorageEvent) => {

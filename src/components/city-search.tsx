@@ -30,8 +30,7 @@ export function CitySearch() {
   const { data: locations, isLoading } = useLocationSearch(debounced);
   const { favorites } = useFavorites();
   const { history, clearHistory, addToHistory } = useSearchHistory();
-
-  // Press "/" to open the search
+  
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "/" && !open) {
@@ -44,7 +43,6 @@ export function CitySearch() {
   }, [open]);
 
   const handleSelect = (raw: string) => {
-    // raw = "lat|lon|name|country"
     const [latStr, lonStr, name, country] = raw.split("|");
     const lat = parseFloat(latStr);
     const lon = parseFloat(lonStr);
@@ -65,7 +63,6 @@ export function CitySearch() {
 
   return (
     <>
-      {/* Launcher */}
       <Button
         variant="outline"
         className="
@@ -83,8 +80,7 @@ export function CitySearch() {
         <Search className="mr-2 h-4 w-4" aria-hidden="true" />
         Search cities...
       </Button>
-
-      {/* Dialog */}
+     
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Command>
           <CommandInput
@@ -97,8 +93,7 @@ export function CitySearch() {
               <CommandEmpty role="status">No cities found.</CommandEmpty>
             )}
             <CommandSeparator />
-
-            {/* Favorites */}
+            
             {favorites.length > 0 && (
               <CommandGroup heading="Favorites">
                 {favorites.map((city) => (
@@ -127,8 +122,7 @@ export function CitySearch() {
                 ))}
               </CommandGroup>
             )}
-
-            {/* History */}
+           
             {history.length > 0 && (
               <>
                 <CommandSeparator />
@@ -183,8 +177,7 @@ export function CitySearch() {
                 </CommandGroup>
               </>
             )}
-
-            {/* Results */}
+          
             <CommandSeparator />
             {locations && locations.length > 0 && (
               <CommandGroup heading="Suggestions">
