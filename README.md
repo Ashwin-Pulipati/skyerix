@@ -8,7 +8,7 @@
   <p align="center">
     A sleek, modern weather dashboard providing real-time weather information, forecasts, and a world map of your favorite cities.
     <br />
-    <a href="#"><strong>View Demo »</strong></a>
+    <a href="https://skyerix.vercel.app/"><strong>View Demo »</strong></a>
   </p>
 </div>
 
