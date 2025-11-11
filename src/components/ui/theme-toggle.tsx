@@ -58,7 +58,7 @@ export default function ThemeToggle() {
                   className={cn(
                     "rounded-full cursor-pointer",
                     isActive
-                      ? "bg-background text-primary shadow-sm border border-muted-foreground/50"
+                      ? "bg-primary text-background shadow-sm border border-muted-foreground/50"
                       : "text-current"
                   )}
                 >

@@ -50,23 +50,35 @@ const WeatherDetails = ({ data }: WeatherDetailsProps) => {
     ];
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Weather Details</CardTitle>
+    <Card className="font-sans text-md leading-[var(--line-height)] text-foreground">
+      <CardHeader className="pb-3">
+        <CardTitle className="font-display text-xl sm:text-2xl tracking-tight">
+          Weather Details
+        </CardTitle>
       </CardHeader>
+
       <CardContent>
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2">
           {details.map((detail) => (
             <div
               key={detail.title}
-              className="flex items-center gap-3 rounded-lg border p-4"
+              role="group"
+              aria-label={`${detail.title}: ${detail.value}`}
+              className="flex items-center gap-3 rounded-lg border bg-card p-4 shadow-xs"
             >
-              <detail.icon className={`h-5 w-5 ${detail.color}`} />
-              <div>
+              {/* keep color logic from detail.color; just make it accessible */}
+              <detail.icon
+                className={`h-5 w-5 ${detail.color}`}
+                aria-hidden="true"
+              />
+
+              <div className="min-w-0">
                 <p className="text-sm font-medium leading-none">
                   {detail.title}
                 </p>
-                <p className="text-sm text-muted-foreground">{detail.value}</p>
+                <p className="text-sm text-muted-foreground font-mono">
+                  {detail.value}
+                </p>
               </div>
             </div>
           ))}

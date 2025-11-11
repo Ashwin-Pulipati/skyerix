@@ -78,7 +78,7 @@ export function CitySearch() {
         aria-haspopup="dialog"
         aria-expanded={open}
       >
-        <Search className="mr-2 h-4 w-4 text-primary" aria-hidden="true" />
+        <Search className="mr-2 h-4 w-4" aria-hidden="true" />
         Search cities...
       </Button>
 

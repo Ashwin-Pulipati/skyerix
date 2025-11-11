@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useFavorites } from "@/hooks/use-favorites";
 import { toast } from "sonner";
 import { WeatherData } from "@/app/api/types";
+import { cn } from "@/lib/utils";
 
 interface FavoriteButtonProps {
   data: WeatherData;
@@ -33,18 +34,18 @@ export function FavoriteButton({ data }: FavoriteButtonProps) {
 
   return (
     <Button
-      type="button"
       variant={active ? "secondary" : "outline"}
       size="icon-lg"
       onClick={handleToggleFavorite}
       aria-label={ariaLabel}
       aria-pressed={active}
       title={ariaLabel}
-      className={
+      className={cn(
+        "rounded-full",
         active
           ? "hover:bg-secondary/90 focus-visible:ring-secondary/40"
           : "text-muted-foreground hover:text-foreground"
-      }
+      )}
     >
       <Star
         className={`h-4 w-4 ${

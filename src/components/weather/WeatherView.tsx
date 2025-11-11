@@ -8,6 +8,11 @@ import { MapPin, RefreshCw } from "lucide-react";
 import WeatherDetails from "../weather-details";
 import { FiveDayWeatherForecast } from "../five-day-weather-forecast";
 import { FavoriteButton } from "../favorite-button";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
 
 interface WeatherViewProps {
   weatherData: WeatherData;
@@ -28,30 +33,72 @@ const WeatherView = ({
 }: WeatherViewProps) => {
   return (
     <div className="mt-7 md:mt-0 space-y-4">
-      <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold tracking-tight">
+      <div className="flex items-center justify-between">
+        <h1 className="font-display text-xl font-bold tracking-tight">
           {locationData?.name || "My Location"}
         </h1>
+
         <div className="flex items-center gap-4">
-          <FavoriteButton data={weatherData} />
-          <Button
-            variant="outline"
-            size="icon-lg"
-            onClick={onCurrentLocation}
-          >
-            <MapPin size={20} />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon-lg"
-            onClick={onRefresh}
-            disabled={isRefreshing}
-          >
-            <RefreshCw
-              className={`${isRefreshing ? "animate-spin" : ""}`}
-              size={20}
-            />
-          </Button>
+          {/* Favorite */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="inline-flex">
+                <FavoriteButton
+                  data={weatherData}
+                  aria-label="Toggle favorite"
+                />
+              </span>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">Toggle favorite</TooltipContent>
+          </Tooltip>
+
+          {/* Current location */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="inline-flex">
+                <Button
+                  variant="outline"
+                  size="icon-lg"
+                  onClick={onCurrentLocation}
+                  aria-label="Use current location"
+                  className="rounded-full"
+                >
+                  <MapPin size={20} aria-hidden="true" />
+                </Button>
+              </span>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">Use current location</TooltipContent>
+          </Tooltip>
+
+          {/* Refresh (works even when disabled) */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              {/* Wrap disabled buttons so Radix can still receive pointer events */}
+              <span
+                className="inline-flex"
+                tabIndex={isRefreshing ? 0 : undefined}
+                aria-disabled={isRefreshing || undefined}
+              >
+                <Button
+                  variant="outline"
+                  size="icon-lg"
+                  onClick={onRefresh}
+                  disabled={isRefreshing}
+                  aria-label={isRefreshing ? "Refreshing" : "Refresh weather"}
+                  className="rounded-full"
+                >
+                  <RefreshCw
+                    size={20}
+                    className={isRefreshing ? "animate-spin" : ""}
+                    aria-hidden="true"
+                  />
+                </Button>
+              </span>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              {isRefreshing ? "Refreshing…" : "Refresh"}
+            </TooltipContent>
+          </Tooltip>
         </div>
       </div>
 
