@@ -7,6 +7,7 @@ import Header from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
 import Scroller from "@/components/ui/scroller";
 import { Toaster } from "@/components/ui/sonner"; 
+import "leaflet/dist/leaflet.css";
 
 const andika = Andika({
   variable: "--font-andika",

@@ -2,6 +2,7 @@ import { WeatherData } from "@/app/api/types";
 import { format } from "date-fns";
 import { Sunrise, Sunset, Compass, Gauge } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { memo } from "react";
 
 
 interface WeatherDetailsProps {
@@ -88,4 +89,4 @@ const WeatherDetails = ({ data }: WeatherDetailsProps) => {
   );
 }
 
-export default WeatherDetails
+export default memo(WeatherDetails);

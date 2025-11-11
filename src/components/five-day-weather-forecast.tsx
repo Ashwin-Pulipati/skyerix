@@ -3,6 +3,7 @@ import { ArrowDown, ArrowUp, Droplets, Wind } from "lucide-react";
 import { format } from "date-fns";
 import { ForecastData } from "@/app/api/types";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "./ui/table";
+import { useMemo } from "react";
 
 
 interface FiveDayWeatherForecastProps {
@@ -23,30 +24,37 @@ interface DailyForecast {
   };
 }
 
-export function FiveDayWeatherForecast ({ data }: FiveDayWeatherForecastProps) {
-  // Group forecast by day and get daily min/max
-  const dailyForecasts = data.list.reduce((acc, forecast) => {
-    const date = format(new Date(forecast.dt * 1000), "yyyy-MM-dd");
+export function FiveDayWeatherForecast({ data }: FiveDayWeatherForecastProps) {
+  const dailyForecasts = useMemo(() => {
+    return data.list.reduce((acc, forecast) => {
+      const date = format(new Date(forecast.dt * 1000), "yyyy-MM-dd");
+      if (!acc[date]) {
+        acc[date] = {
+          temp_min: forecast.main.temp_min,
+          temp_max: forecast.main.temp_max,
+          humidity: forecast.main.humidity,
+          wind: forecast.wind.speed,
+          weather: forecast.weather[0],
+          date: forecast.dt,
+        };
+      } else {
+        acc[date].temp_min = Math.min(
+          acc[date].temp_min,
+          forecast.main.temp_min
+        );
+        acc[date].temp_max = Math.max(
+          acc[date].temp_max,
+          forecast.main.temp_max
+        );
+      }
+      return acc;
+    }, {} as Record<string, DailyForecast>);
+  }, [data.list]);
 
-    if (!acc[date]) {
-      acc[date] = {
-        temp_min: forecast.main.temp_min,
-        temp_max: forecast.main.temp_max,
-        humidity: forecast.main.humidity,
-        wind: forecast.wind.speed,
-        weather: forecast.weather[0],
-        date: forecast.dt,
-      };
-    } else {
-      acc[date].temp_min = Math.min(acc[date].temp_min, forecast.main.temp_min);
-      acc[date].temp_max = Math.max(acc[date].temp_max, forecast.main.temp_max);
-    }
-
-    return acc;
-  }, {} as Record<string, DailyForecast>);
-
-  // Get next 5 days
-  const nextDays = Object.values(dailyForecasts).slice(1, 6);
+  const nextDays = useMemo(
+    () => Object.values(dailyForecasts).slice(1, 6),
+    [dailyForecasts]
+  );
 
   // Format temperature
   const formatTemp = (temp: number) => `${Math.round(temp)}°`;

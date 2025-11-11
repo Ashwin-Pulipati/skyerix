@@ -19,13 +19,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { useSearchHistory } from "@/hooks/use-search-history";
 import { useFavorites } from "@/hooks/use-favorites";
+import { useDebounce } from "@/hooks/use-debounce";
 
 export function CitySearch() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const debounced = useDebounce(query, 300);
   const router = useRouter();
 
-  const { data: locations, isLoading } = useLocationSearch(query);
+  const { data: locations, isLoading } = useLocationSearch(debounced);
   const { favorites } = useFavorites();
   const { history, clearHistory, addToHistory } = useSearchHistory();
 

@@ -13,6 +13,7 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@/components/ui/tooltip";
+import WorldFavoritesMap from "../world-favorites-map";
 
 interface WeatherViewProps {
   weatherData: WeatherData;
@@ -32,7 +33,7 @@ const WeatherView = ({
   onCurrentLocation,
 }: WeatherViewProps) => {
   return (
-    <div className="mt-7 md:mt-0 space-y-4">
+    <div className="mt-7 md:mt-6 space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="font-display text-xl font-bold tracking-tight">
           {locationData?.name || "My Location"}
@@ -108,6 +109,7 @@ const WeatherView = ({
         <WeatherDetails data={weatherData} />
         <FiveDayWeatherForecast data={forecastData} />
       </div>
+      <WorldFavoritesMap />
     </div>
   );
 };
