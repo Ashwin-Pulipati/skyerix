@@ -99,7 +99,7 @@ You can also report a bug or request a feature by opening an issue:
 
 ## 📄 License
 
-Distributed under the MIT License. See the `LICENSE` file for more information.
+Distributed under the MIT License. See the [LICENSE](LICENSE) file for more information.
 
 ## 📧 Contact
 
