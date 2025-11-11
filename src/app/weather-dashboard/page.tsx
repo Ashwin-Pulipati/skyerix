@@ -1,16 +1,16 @@
 "use client";
 
 import CitySearch from "@/components/city-search";
-import LocationRequired from "@/components/weather/LocationRequired";
-import WeatherError from "@/components/weather/WeatherError";
-import WeatherLoading from "@/components/weather/WeatherLoading";
-import WeatherView from "@/components/weather/WeatherView";
+import LocationRequired from "@/components/dashboard/location-required";
+import WeatherError from "@/components/dashboard/weather-error";
+import WeatherLoading from "@/components/dashboard/weather-loading";
+import WeatherView from "@/components/dashboard/dashboard-view";
 import { useWeatherData } from "@/hooks/use-weather-data";
-import { useSearchParams, useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const FavoriteCities = dynamic(
-  () => import("@/components/favorite-cities"),
+  () => import("@/components/favorites/favorite-cities"),
   { ssr: false }
 );
 
@@ -49,7 +49,12 @@ const WeatherDashboard = () => {
 
   const displayLocation =
     city && locationData
-      ? { ...locationData, name: city, lat: locationData.lat, lon: locationData.lon }
+      ? {
+          ...locationData,
+          name: city,
+          lat: locationData.lat,
+          lon: locationData.lon,
+        }
       : locationData;
 
   return (

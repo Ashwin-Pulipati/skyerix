@@ -1,4 +1,3 @@
-// src/hooks/use-favorites.ts
 "use client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";

@@ -1,21 +1,21 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { Monitor, Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Button } from "./button";
+import { cn } from "@/lib/utils";
+import { Monitor, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
 
 export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
-  
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -25,7 +25,7 @@ export default function ThemeToggle() {
     { id: "dark", label: "Dark", icon: <Moon size={18} /> },
     { id: "system", label: "System", icon: <Monitor size={18} /> },
   ];
-  
+
   if (!mounted) {
     return (
       <div

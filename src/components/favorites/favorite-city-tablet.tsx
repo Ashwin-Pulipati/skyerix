@@ -1,13 +1,9 @@
-"use client";
-
-import { useCallback } from "react";
-import { useRouter } from "next/navigation";
-import { useWeatherQuery } from "@/hooks/use-weather";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { X, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useFavorites } from "@/hooks/use-favorites";
+import { useRouter } from "next/navigation";
+import { useWeatherQuery } from "@/hooks/use-weather";
 import { toast } from "sonner";
+import { memo, useCallback } from "react";
 
 interface FavoriteCityTabletProps {
   readonly id: string;
@@ -69,6 +65,8 @@ function FavoriteCityTablet({
                 }@2x.png`}
                 alt={weather.weather?.[0]?.description ?? "weather icon"}
                 className="h-8 w-8 md:h-10 md:w-10"
+                loading="lazy"
+                decoding="async"
               />
               <div className="min-w-0">
                 {/* city name: body font, fluid md */}
@@ -123,65 +121,4 @@ function FavoriteCityTablet({
   );
 }
 
-export function FavoriteCities() {
-  const { favorites, removeFavorite } = useFavorites();
-
-  if (!favorites || favorites.length === 0) {
-    return null;
-  }
-
-  return (
-    <section
-      aria-labelledby="favorites-heading"
-      className="
-    space-y-3
-    text-md leading-[var(--line-height)] text-foreground
-  "
-    >
-      <h2
-        id="favorites-heading"
-        className="
-      text-xl md:text-2xl font-bold tracking-tight
-      text-foreground font-display
-    "
-      >
-        Favorites
-      </h2>
-
-      <ScrollArea
-        className="
-      w-full pb-2 md:pb-3
-      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
-    "
-      >
-        <div
-          className="
-        flex gap-3 md:gap-4 pr-2
-        snap-x snap-mandatory
-        scroll-smooth
-      "
-          aria-label="Favorite cities"
-        >
-          {favorites.map((city) => (
-            <div key={city.id} className="snap-start">
-              <FavoriteCityTablet
-                id={city.id}
-                name={city.name}
-                lat={city.lat}
-                lon={city.lon}
-                onRemove={() => removeFavorite.mutate(city.id)}
-              />
-            </div>
-          ))}
-        </div>
-
-        <ScrollBar
-          orientation="horizontal"
-          className="mt-2 opacity-75 hover:opacity-100 transition-opacity"
-        />
-      </ScrollArea>
-    </section>
-  );
-}
-
-export default FavoriteCities;
+export default memo(FavoriteCityTablet);

@@ -206,4 +206,4 @@ const HourlyWeather = ({ data }: HourlyTemperatureProps) => {
   );
 };
 
-export default HourlyWeather;
+export default React.memo(HourlyWeather);
