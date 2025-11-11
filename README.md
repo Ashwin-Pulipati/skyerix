@@ -18,7 +18,8 @@ Skyrix is a beautifully designed weather application built with a modern tech st
 
 
 
-https://github.com/user-attachments/assets/72480092-1a51-4b5e-8cba-1a2946f77f09
+https://github.com/user-attachments/assets/b127ac56-d7b3-4357-858a-559eafc135c2
+
 
 
 ## ⚙️ Built With
