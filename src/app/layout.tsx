@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-import { Andika, Poppins, Nunito } from "next/font/google";
-import { ThemeProvider as NextJSThemeProvider } from "next-themes";
-import "./globals.css";
-import Providers from "./providers";
 import Header from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
 import Scroller from "@/components/ui/scroller";
-import { Toaster } from "@/components/ui/sonner"; 
+import { Toaster } from "@/components/ui/sonner";
 import "leaflet/dist/leaflet.css";
+import type { Metadata } from "next";
+import { ThemeProvider as NextJSThemeProvider } from "next-themes";
+import { Andika, Nunito, Poppins } from "next/font/google";
+import "./globals.css";
+import Providers from "./providers";
 
 const andika = Andika({
   variable: "--font-andika",

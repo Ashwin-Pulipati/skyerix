@@ -1,5 +1,5 @@
-import LoadingSkeleton from "@/components/loading-skeleton";
 import { Button } from "@/components/ui/button";
+import LoadingSkeleton from "@/components/ui/loading-skeleton";
 import { RefreshCcw } from "lucide-react";
 import { Skeleton } from "../ui/skeleton";
 

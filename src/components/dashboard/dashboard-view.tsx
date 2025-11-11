@@ -4,15 +4,15 @@ import { ForecastData, GeocodingResponse, WeatherData } from "@/app/api/types";
 import { CurrentWeather } from "@/components/current-weather";
 import HourlyTemperature from "@/components/hourly-weather";
 import { Button } from "@/components/ui/button";
-import { MapPin, RefreshCw } from "lucide-react";
-import WeatherDetails from "../weather-details";
-import { FiveDayWeatherForecast } from "../five-day-weather-forecast";
-import { FavoriteButton } from "../favorite-button";
 import {
   Tooltip,
-  TooltipTrigger,
   TooltipContent,
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { MapPin, RefreshCw } from "lucide-react";
+import { FavoriteButton } from "../favorites/favorite-button";
+import { FiveDayWeatherForecast } from "../five-day-weather-forecast";
+import WeatherDetails from "../weather-details";
 import WorldFavoritesMap from "../world-favorites-map";
 
 interface WeatherViewProps {

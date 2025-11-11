@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 
 const WorldFavoritesMapInner = dynamic(
-  () => import("./world-favorites-map-inner"),
+  () => import("./favorites/world-favorites-map-inner"),
   { ssr: false }
 );
 

@@ -1,5 +1,4 @@
-import { Skeleton } from "./ui/skeleton";
-
+import { Skeleton } from "../ui/skeleton";
 
 const LoadingSkeleton = () => {
   return (
@@ -17,6 +16,6 @@ const LoadingSkeleton = () => {
       <Skeleton className="h-[500px] w-full rounded-lg bg-muted-foreground/30 animate-pulse" />
     </>
   );
-}
+};
 
-export default LoadingSkeleton
+export default LoadingSkeleton;
