@@ -10,6 +10,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Button } from "./button";
 
 export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
@@ -49,18 +50,20 @@ export default function ThemeToggle() {
           return (
             <Tooltip key={option.id}>
               <TooltipTrigger asChild>
-                <button
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
                   onClick={() => setTheme(option.id)}
                   aria-label={`Switch to ${option.label} theme`}
                   className={cn(
-                    "flex w-full items-center justify-center rounded-full p-2 transition-colors duration-200 cursor-pointer",
+                    "rounded-full cursor-pointer",
                     isActive
                       ? "bg-background text-primary shadow-sm border border-muted-foreground/50"
-                      : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
+                      : "text-current"
                   )}
                 >
                   {option.icon}
-                </button>
+                </Button>
               </TooltipTrigger>
               <TooltipContent>
                 <p>{option.label}</p>

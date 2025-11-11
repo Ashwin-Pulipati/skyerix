@@ -63,9 +63,9 @@ function FavoriteCityTablet({
         size="icon"
         className="
       absolute right-2 top-2 z-20 h-7 w-7 rounded-full p-0
-      text-foreground bg-muted/40
+      text-foreground bg-muted/90
       hover:bg-destructive hover:text-destructive-foreground
-      dark:hover:bg-destructive dark:hover:text-destructive-foreground
+      dark:hover:bg-destructive dark:hover:text-destructive-foreground 
     "
         onClick={(e) => {
           e.stopPropagation();

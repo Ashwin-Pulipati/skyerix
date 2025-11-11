@@ -68,7 +68,6 @@ function CommandDialog({
   );
 }
 
-/* Input with in-field Clear button (destructive) */
 
 function CommandInput({
   className,
@@ -90,7 +89,7 @@ function CommandInput({
     <div
       data-slot="command-input-wrapper"
       className={cn(
-        "relative m-2 mt-4 flex h-9 items-center gap-2 rounded-full border-input bg-background px-3 pr-2",
+        "relative m-2 mt-4 flex h-9 items-center gap-2 rounded-full border border-input bg-background px-3 pr-2",
         "focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/60"
       )}
     >
@@ -102,7 +101,7 @@ function CommandInput({
         aria-controls="command-list"
         data-slot="command-input"
         className={cn(
-          "placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 pr-8 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50 caret-primary",
+          "placeholder:text-muted-foreground placeholder:font-sans flex h-10 w-full rounded-md bg-transparent py-3 pr-8 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50 caret-primary",
           className
         )}
         {...props}

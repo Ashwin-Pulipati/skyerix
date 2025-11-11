@@ -92,7 +92,7 @@ function DialogContent({
       hover:bg-destructive hover:text-destructive-foreground
       dark:hover:bg-destructive dark:hover:text-destructive-foreground
       focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background
-      transition-colors bg-muted-foreground/30
+      transition-colors bg-muted/90
     "
           >
             <XIcon className="h-4 w-4 text-current" aria-hidden="true" />

@@ -63,17 +63,26 @@ export function CitySearch() {
 
   return (
     <>
+      {/* Launcher */}
       <Button
         variant="outline"
-        className="relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64 rounded-full"
+        className="
+      relative w-full md:w-40 lg:w-64
+      justify-start rounded-full
+      text-md leading-[var(--line-height)] font-sans
+      text-muted-foreground
+      sm:pr-12
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
+    "
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
         aria-expanded={open}
       >
-        <Search className="mr-2 h-4 w-4" aria-hidden="true" />
+        <Search className="mr-2 h-4 w-4 text-primary" aria-hidden="true" />
         Search cities...
       </Button>
 
+      {/* Dialog */}
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Command>
           <CommandInput
@@ -85,8 +94,9 @@ export function CitySearch() {
             {query.length > 2 && !isLoading && (
               <CommandEmpty role="status">No cities found.</CommandEmpty>
             )}
-            <CommandSeparator/>
+            <CommandSeparator />
 
+            {/* Favorites */}
             {favorites.length > 0 && (
               <CommandGroup heading="Favorites">
                 {favorites.map((city) => (
@@ -94,13 +104,19 @@ export function CitySearch() {
                     key={city.id}
                     value={`${city.lat}|${city.lon}|${city.name}|${city.country}`}
                     onSelect={handleSelect}
-                    className="text-current group"
+                    className="
+                  group text-current
+                  text-sm leading-[var(--line-height)] font-sans
+                "
                   >
                     <Star
-                      className="mr-2 h-4 w-4 text-secondary group-data-[selected=true]:text-current"
+                      className="
+                    mr-2 h-4 w-4 text-secondary
+                    group-data-[selected=true]:text-current
+                  "
                       aria-hidden="true"
                     />
-                    <span className="flex-1 text-sm">
+                    <span className="flex-1 truncate">
                       {city.name}
                       {city.state ? `, ${city.state}` : ""}
                       {`, ${city.country}`}
@@ -110,13 +126,13 @@ export function CitySearch() {
               </CommandGroup>
             )}
 
-            {/* Search History */}
+            {/* History */}
             {history.length > 0 && (
               <>
                 <CommandSeparator />
                 <CommandGroup>
                   <div className="my-2 flex items-center justify-between px-2">
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-muted-foreground font-sans">
                       Recent Searches
                     </p>
                     <Button
@@ -125,10 +141,10 @@ export function CitySearch() {
                       onClick={() => clearHistory.mutate()}
                       aria-label="Clear recent searches"
                       className="
-                        text-destructive
-      hover:bg-destructive hover:text-destructive-foreground
-      dark:hover:bg-destructive dark:hover:text-destructive-foreground rounded-full
-                      "
+                    rounded-full
+                    text-destructive
+                    hover:bg-destructive hover:text-destructive-foreground dark:hover:bg-destructive
+                  "
                     >
                       <XCircle
                         className="h-4 w-4 text-current"
@@ -143,18 +159,21 @@ export function CitySearch() {
                       key={`history-${item.id}`}
                       value={`${item.lat}|${item.lon}|${item.name}|${item.country}`}
                       onSelect={handleSelect}
-                      className="text-current"
+                      className="
+                    text-current
+                    text-sm leading-[var(--line-height)] font-sans
+                  "
                     >
                       <Clock
                         className="mr-2 h-4 w-4 text-current"
                         aria-hidden="true"
                       />
-                      <span className="flex-1 text-sm">
+                      <span className="flex-1 truncate">
                         {item.name}
                         {item.state ? `, ${item.state}` : ""}
                         {`, ${item.country}`}
                       </span>
-                      <span className="ml-auto whitespace-nowrap text-xs">
+                      <span className="ml-auto whitespace-nowrap text-xs text-current">
                         {format(item.searchedAt, "MMM d, h:mm a")}
                       </span>
                     </CommandItem>
@@ -163,7 +182,7 @@ export function CitySearch() {
               </>
             )}
 
-            {/* Search Results */}
+            {/* Results */}
             <CommandSeparator />
             {locations && locations.length > 0 && (
               <CommandGroup heading="Suggestions">
@@ -185,13 +204,19 @@ export function CitySearch() {
                     key={`suggestion-${location.lat}-${location.lon}`}
                     value={`${location.lat}|${location.lon}|${location.name}|${location.country}`}
                     onSelect={handleSelect}
-                    className="text-current group"
+                    className="
+                  group text-current
+                  text-sm leading-[var(--line-height)] font-sans
+                "
                   >
                     <Search
-                      className="mr-2 h-4 w-4 text-primary group-data-[selected=true]:text-current"
+                      className="
+                    mr-2 h-4 w-4 text-primary
+                    group-data-[selected=true]:text-current
+                  "
                       aria-hidden="true"
                     />
-                    <span className="flex-1 text-sm">
+                    <span className="flex-1 truncate">
                       {location.name}
                       {location.state ? `, ${location.state}` : ""}
                       {`, ${location.country}`}
