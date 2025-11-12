@@ -41,18 +41,21 @@ export function FavoriteButton({ data }: FavoriteButtonProps) {
       aria-pressed={active}
       title={ariaLabel}
       className={cn(
-        "rounded-full",
+        "rounded-full group",
         active
           ? "hover:bg-secondary/90 focus-visible:ring-secondary/40"
-          : "text-muted-foreground hover:text-foreground"
+          : 
+            "text-muted-foreground hover:text-accent-foreground focus-visible:ring-accent/40"
       )}
     >
       <Star
-        className={`h-4 w-4 ${
+        className={cn(
+          "h-4 w-4 transition-colors",
           active
-            ? "fill-current text-background dark:text-secondary-foreground"
-            : "text-secondary"
-        }`}
+            ? "fill-current text-background"
+            : 
+              "text-secondary group-hover:text-accent-foreground group-focus-visible:text-accent-foreground"
+        )}
         aria-hidden="true"
       />
       <span className="sr-only">{ariaLabel}</span>

@@ -28,7 +28,7 @@ export function CitySearch() {
   const router = useRouter();
 
   const { data: locations, isLoading } = useLocationSearch(debounced);
-  const { favorites } = useFavorites();
+  const { favorites, removeFavorite } = useFavorites();
   const { history, clearHistory, addToHistory } = useSearchHistory();
   
   useEffect(() => {
@@ -61,6 +61,11 @@ export function CitySearch() {
     router.push(`/weather-dashboard?lat=${lat}&lon=${lon}&city=${cityParam}`);
   };
 
+  const clearAllFavorites = () => {
+    if (!favorites.length) return;
+    favorites.forEach((c) => removeFavorite.mutate(c.id));
+  };
+
   return (
     <>
       <Button
@@ -80,7 +85,7 @@ export function CitySearch() {
         <Search className="mr-2 h-4 w-4" aria-hidden="true" />
         Search cities...
       </Button>
-     
+
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Command>
           <CommandInput
@@ -93,36 +98,64 @@ export function CitySearch() {
               <CommandEmpty role="status">No cities found.</CommandEmpty>
             )}
             <CommandSeparator />
-            
+
             {favorites.length > 0 && (
-              <CommandGroup heading="Favorites">
-                {favorites.map((city) => (
-                  <CommandItem
-                    key={city.id}
-                    value={`${city.lat}|${city.lon}|${city.name}|${city.country}`}
-                    onSelect={handleSelect}
-                    className="
-                  group text-current
-                  text-sm leading-[var(--line-height)] font-sans
-                "
-                  >
-                    <Star
+              <>
+                <CommandSeparator />
+                <CommandGroup>
+                  {/* Header row (like history) */}
+                  <div className="my-2 flex items-center justify-between px-2">
+                    <p className="text-xs text-muted-foreground font-sans">
+                      Favorites
+                    </p>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={clearAllFavorites}
+                      aria-label="Clear favorites"
                       className="
-                    mr-2 h-4 w-4 text-secondary
-                    group-data-[selected=true]:text-current
-                  "
-                      aria-hidden="true"
-                    />
-                    <span className="flex-1 truncate">
-                      {city.name}
-                      {city.state ? `, ${city.state}` : ""}
-                      {`, ${city.country}`}
-                    </span>
-                  </CommandItem>
-                ))}
-              </CommandGroup>
+            rounded-full
+            text-destructive
+            hover:bg-destructive hover:text-destructive-foreground
+            dark:hover:bg-destructive
+          "
+                    >
+                      <XCircle
+                        className="h-4 w-4 text-current"
+                        aria-hidden="true"
+                      />
+                      Clear
+                    </Button>
+                  </div>
+
+                  {favorites.map((city) => (
+                    <CommandItem
+                      key={city.id}
+                      value={`${city.lat}|${city.lon}|${city.name}|${city.country}`}
+                      onSelect={handleSelect}
+                      className="
+            group text-current
+            text-sm leading-[var(--line-height)] font-sans
+          "
+                    >
+                      <Star
+                        className="
+              mr-2 h-4 w-4 text-secondary
+              group-data-[selected=true]:text-current
+            "
+                        aria-hidden="true"
+                      />
+                      <span className="flex-1 truncate">
+                        {city.name}
+                        {city.state ? `, ${city.state}` : ""}
+                        {`, ${city.country}`}
+                      </span>
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              </>
             )}
-           
+
             {history.length > 0 && (
               <>
                 <CommandSeparator />
@@ -177,7 +210,7 @@ export function CitySearch() {
                 </CommandGroup>
               </>
             )}
-          
+
             <CommandSeparator />
             {locations && locations.length > 0 && (
               <CommandGroup heading="Suggestions">
