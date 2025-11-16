@@ -22,9 +22,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { format } from "date-fns";
+import { format, isSameDay, addDays } from "date-fns";
 
-/** Tooltip (same as before) */
 function TokenTooltip({
   active,
   payload,
@@ -72,15 +71,33 @@ interface HourlyTemperatureProps {
 }
 
 const HourlyWeather = ({ data }: HourlyTemperatureProps) => {
-  const chartData = React.useMemo(
-    () =>
-      data.list.slice(0, 8).map((item) => ({
-        time: format(new Date(item.dt * 1000), "ha"),
+  const chartData = React.useMemo(() => {
+    const rows = data.list.slice(0, 8).map((item) => {
+      const d = new Date(item.dt * 1000);
+      return {
+        date: d,
+        time: format(d, "ha"),
         temp: Math.round(item.main.temp),
         feelsLike: Math.round(item.main.feels_like),
-      })),
-    [data.list]
-  );
+        dayLabel: format(d, "EEE"),
+      };
+    });
+
+    if (rows.length === 0) return rows;
+
+    const firstDay = rows[0].date;
+    const tomorrow = addDays(firstDay, 1);
+
+    const withDay = rows.map((r) => {
+      let dayLabel: string;
+      if (isSameDay(r.date, firstDay)) dayLabel = "Today";
+      else if (isSameDay(r.date, tomorrow)) dayLabel = "Tomorrow";
+      else dayLabel = format(r.date, "EEE"); // Mon, Tue ...
+      return { ...r, dayLabel };
+    });
+
+    return withDay;
+  }, [data.list]);
 
   return (
     <Card className="font-sans text-md leading-[var(--line-height)] text-foreground">
@@ -102,12 +119,16 @@ const HourlyWeather = ({ data }: HourlyTemperatureProps) => {
             <div className="w-full overflow-x-auto">
               <Table>
                 <TableCaption className="text-sm text-muted-foreground">
-                  Hourly temperature and feels-like for today.
+                  Hourly temperature and feels-like for today (with day
+                  context).
                 </TableCaption>
                 <TableHeader>
                   <TableRow>
                     <TableHead className="w-[120px] min-w-[88px]">
                       Time
+                    </TableHead>
+                    <TableHead className="w-[120px] min-w-[88px]">
+                      Day
                     </TableHead>
                     <TableHead className="min-w-[120px]">Temperature</TableHead>
                     <TableHead className="min-w-[120px]">Feels like</TableHead>
@@ -115,8 +136,11 @@ const HourlyWeather = ({ data }: HourlyTemperatureProps) => {
                 </TableHeader>
                 <TableBody>
                   {chartData.map((row) => (
-                    <TableRow key={row.time}>
+                    <TableRow key={`${row.dayLabel}-${row.time}`}>
                       <TableCell className="font-medium">{row.time}</TableCell>
+                      <TableCell className="text-muted-foreground">
+                        {row.dayLabel}
+                      </TableCell>
                       <TableCell className="font-mono">{row.temp}°</TableCell>
                       <TableCell className="font-mono">
                         {row.feelsLike}°
@@ -127,7 +151,7 @@ const HourlyWeather = ({ data }: HourlyTemperatureProps) => {
               </Table>
             </div>
           </TabsContent>
-          
+
           <TabsContent value="chart">
             <div
               className="h-[220px] w-full sm:h-[240px]"
@@ -137,7 +161,7 @@ const HourlyWeather = ({ data }: HourlyTemperatureProps) => {
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                   data={chartData}
-                  margin={{ top: 6, right: 12, bottom: 0, left: 0 }}
+                  margin={{ top: 8, right: 12, bottom: 16, left: 8 }}
                 >
                   <Legend
                     verticalAlign="top"
@@ -166,6 +190,16 @@ const HourlyWeather = ({ data }: HourlyTemperatureProps) => {
                     tickLine={false}
                     axisLine={false}
                     dy={4}
+                    label={{
+                      value: "Time →",
+                      position: "insideBottomRight",
+                      offset: -6,
+                      style: {
+                        fill: "var(--muted-foreground)",
+                        fontFamily: "var(--font-poppins)",
+                        fontSize: "var(--font-size-sm)",
+                      },
+                    }}
                   />
                   <YAxis
                     stroke="var(--muted-foreground)"
@@ -174,6 +208,17 @@ const HourlyWeather = ({ data }: HourlyTemperatureProps) => {
                     axisLine={false}
                     width={36}
                     tickFormatter={(v: number) => `${v}°`}
+                    label={{
+                      value: "Temp (°) →",
+                      angle: -90,
+                      position: "insideLeft",
+                      offset: -2,
+                      style: {
+                        fill: "var(--muted-foreground)",
+                        fontFamily: "var(--font-poppins)",
+                        fontSize: "var(--font-size-sm)",
+                      },
+                    }}
                   />
                   <Line
                     type="monotone"
