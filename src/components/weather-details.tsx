@@ -51,7 +51,7 @@ const WeatherDetails = ({ data }: WeatherDetailsProps) => {
     ];
 
   return (
-    <Card className="font-sans text-md leading-[var(--line-height)] text-foreground">
+    <Card className="font-sans text-md leading-[var(--line-height)] text-foreground h-fit">
       <CardHeader className="pb-3">
         <CardTitle className="font-display text-xl sm:text-2xl tracking-tight">
           Weather Details
