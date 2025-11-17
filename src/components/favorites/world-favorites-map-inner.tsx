@@ -37,33 +37,13 @@ function FitToPoints({
   return null;
 }
 
-function createPinOutline(colorVar: string): DivIcon {
-  return L.divIcon({
-    html: `
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"
-        fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round"
-        style="color:${colorVar}">
-        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0Z"/>
-        <circle cx="12" cy="10" r="3"/>
-      </svg>
-    `,
-    className: "",
-    iconSize: [26, 26],
-    iconAnchor: [13, 24],
-    popupAnchor: [0, -20],
-  });
-}
-
 function createPinFilled(colorVar: string): DivIcon {
   return L.divIcon({
     html: `
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
         style="color:${colorVar}; display:block; filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.25));">
-        <!-- solid pin -->
         <path d="M12 22s-9-6-9-12a9 9 0 1 1 18 0c0 6-9 12-9 12z"
-          fill="currentColor" stroke="none"/>
-        <!-- inner dot contrasts with background -->
+          fill="currentColor" stroke="black"/>
         <circle cx="12" cy="10" r="3.2" fill="var(--background)"/>
       </svg>
     `,
@@ -93,7 +73,7 @@ export default function WorldFavoritesMapInner() {
     return [20, 0];
   }, [favorites, hasFavorites, coordinates]);
 
-  const favoriteIcon = useMemo(() => createPinOutline("var(--secondary)"), []);
+  const favoriteIcon = useMemo(() => createPinFilled("var(--secondary)"), []);
   const currentIcon = useMemo(() => createPinFilled("var(--primary)"), []);
 
   return (
@@ -121,13 +101,13 @@ export default function WorldFavoritesMapInner() {
             />
 
             {points.length > 0 && <FitToPoints points={points} />}
-           
+
             {hasFavorites &&
               favorites.map((f) => (
                 <Marker
                   key={f.id}
                   position={[f.lat, f.lon]}
-                  icon={favoriteIcon}
+                  icon={favoriteIcon} 
                   eventHandlers={{
                     click: () => {
                       const cityParam = encodeURIComponent(f.name);
@@ -158,11 +138,11 @@ export default function WorldFavoritesMapInner() {
                   </Tooltip>
                 </Marker>
               ))}
-            
+
             {!hasFavorites && coordinates && (
               <Marker
                 position={[coordinates.lat, coordinates.lon]}
-                icon={currentIcon}
+                icon={currentIcon} 
               >
                 <Tooltip direction="top" offset={[0, -4]}>
                   <div className="font-sans text-xs">
