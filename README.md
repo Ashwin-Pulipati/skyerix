@@ -3,7 +3,7 @@
     <img src="public/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Skyrix</h3>
+  <h3 align="center">Skyerix</h3>
 
   <p align="center">
     A sleek, modern weather dashboard providing real-time weather information, forecasts, and a world map of your favorite cities.
@@ -46,6 +46,12 @@ This project is built with a modern tech stack that ensures a fast, responsive, 
 - **Responsive Design:** A seamless experience on both desktop and mobile devices.
 
 ## 🏗️ System Architecture
+
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/ba9b010d-dbbd-4cd2-b3d9-ca39daccfdb8" alt="Skyerix Weather Dashboard System Architecture Diagram" width="900">
+</div>
+<br />
+
 Skyerix is built on a high-performance Next.js architecture designed for real-time data visualization and persistent user preferences. The system emphasizes a clean separation between server state, client state, and the data access layer.
 1. Application Layer (Next.js & UI)
 •	App Router Orchestration: Leverages the Next.js App Router for structured navigation and optimized layouts.
