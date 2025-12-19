@@ -45,6 +45,20 @@ This project is built with a modern tech stack that ensures a fast, responsive, 
 - **Light & Dark Mode:** A comfortable viewing experience in any lighting condition.
 - **Responsive Design:** A seamless experience on both desktop and mobile devices.
 
+## 🏗️ System Architecture
+Skyerix is built on a high-performance Next.js architecture designed for real-time data visualization and persistent user preferences. The system emphasizes a clean separation between server state, client state, and the data access layer.
+1. Application Layer (Next.js & UI)
+•	App Router Orchestration: Leverages the Next.js App Router for structured navigation and optimized layouts.
+•	State-Linked Routing: Uses URL Search Parameters as the primary source of truth for location state. This allows for deep-linking and ensures that the UI remains in sync even after page refreshes or link sharing.
+•	Modern UI primitives: Built using Tailwind CSS and shadcn/ui, featuring responsive data visualizations via Recharts and interactive mapping via Leaflet.js.
+2. State & Logic Layer (The "Engine")
+•	Server State Management: Powered by TanStack Query (React Query). This handles all asynchronous data lifecycle tasks, including background refetching, intelligent caching (stale-while-revalidate), and loading state management.
+•	Custom Hooks Architecture: Logic is encapsulated within domain-specific hooks (useWeather, useFavorites, useGeolocation). This creates a clean, declarative API for the UI components to consume.
+•	Client-Side Persistence: A custom useLocalStorage hook manages long-term persistence for user "Favorites" and "Search History," decoupled from the volatile weather data.
+3. Data Access Layer (Abstraction)
+•	WeatherAPI Class: All external interactions are abstracted into a singleton WeatherAPI class. This encapsulates the fetch logic, error handling, and URL construction, making the codebase resilient to future API changes.
+•	Type-Safe Interfaces: Comprehensive TypeScript interfaces define the shape of the weather and forecast data, providing end-to-end type safety from the API response to the visual components.
+
 ## ▶️ Getting Started
 
 To get a local copy up and running, follow these simple steps.
